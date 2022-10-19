@@ -1,25 +1,63 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from "vue-router";
+import { RouterView } from 'vue-router';
+import { reactive, onMounted } from 'vue';
+import { Sunny, Moon } from '@element-plus/icons-vue';
+
+const theme = reactive({ value: 'light' });
+
+onMounted(() => {
+  const localTheme = localStorage.getItem('loose-theme');
+  if (localTheme) {
+    theme.value = localTheme;
+  }
+  if (theme.value == 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+});
+
+const changeTheme = (val: string) => {
+  console.log(val);
+  theme.value = val;
+  if (val == 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+    localStorage.setItem('loose-theme', 'light');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    localStorage.setItem('loose-theme', 'dark');
+  }
+};
 </script>
 
 <template>
   <header>
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/count">Count</RouterLink>
-      </nav>
+    <div class="theme-wrap">
+      <el-switch
+        active-value="light"
+        inactive-value="dark"
+        v-model="theme.value"
+        @change="changeTheme"
+        :active-icon="Sunny"
+        :inactive-icon="Moon"
+        inactive-color="#999"
+        inline-prompt
+      />
     </div>
   </header>
 
   <RouterView />
 </template>
 
-<style scoped>
+<style lang="less" scoped>
 header {
-  line-height: 1.5;
+  height: 60px;
+  display: flex;
+  align-items: center;
   max-height: 100vh;
+  & :deep(.el-switch) {
+    height: 20px;
+  }
 }
 
 .logo {
@@ -50,12 +88,28 @@ nav a {
 nav a:first-of-type {
   border: 0;
 }
-
+.theme-wrap {
+  position: absolute;
+  right: 0px;
+  & :deep(.el-switch__core .el-switch__action) {
+    background-color: transparent;
+  }
+  & :deep(.el-switch.is-checked .el-switch__core .el-switch__inner) {
+    border-radius: 50%;
+    background: #f5f5f5;
+  }
+  & :deep(.el-switch__core .el-switch__inner) {
+    background: #333;
+    border-radius: 50%;
+  }
+  & :deep(.el-switch__core .el-switch__inner .is-icon) {
+    color: var(--color-text);
+  }
+}
 @media (min-width: 1024px) {
   header {
     display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+    position: relative;
   }
 
   .logo {
