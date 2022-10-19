@@ -157,6 +157,7 @@ const handleSwitch = (val: any) => {
     height: 300px;
     text-align: left;
     overflow-y: auto;
+    overscroll-behavior: none;
     border-radius: 0px 0px 4px 4px;
     padding-top: 10px;
     /* overflow-x: hidden; */
@@ -165,14 +166,10 @@ const handleSwitch = (val: any) => {
       justify-content: space-between;
       align-items: center;
       width: 100%;
-      height: 32px;
+      min-height: 32px;
       padding: 2px 20px;
       position: relative;
-      .text {
-        overflow: hidden; //超出的文本隐藏
-        text-overflow: ellipsis; //溢出用省略号显示
-        white-space: nowrap; //溢出不换行
-      }
+      transition: all 0.3s;
       .completed-text {
         color: var(--completed-text-color);
         text-decoration: line-through;
@@ -180,13 +177,11 @@ const handleSwitch = (val: any) => {
       &:hover {
         /* background: #fdf0e1; */
         background: var(--content-item-bg-color-hover);
+        padding: 20px 20px;
+        transition: all 0.3s;
       }
       .switch-wrap {
         display: none;
-        position: absolute;
-        right: 20px;
-        top: 0px;
-        bottom: 0px;
       }
       &:hover .switch-wrap {
         display: inline-block;

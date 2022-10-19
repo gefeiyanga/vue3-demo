@@ -88,6 +88,32 @@
   --content-item-bg-color-hover: #3f3932;
   --completed-text-color: #aaa;
 }
+[data-theme='light'] {
+  --color-background: #ffffff;
+  --color-background-soft: var(--vt-c-white-soft);
+  --color-background-mute: var(--vt-c-white-mute);
+
+  --color-border: var(--vt-c-divider-light-2);
+  --color-border-hover: var(--vt-c-divider-light-1);
+
+  --color-heading: var(--vt-c-text-light-1);
+  --color-text: #000000;
+
+  --section-gap: 160px;
+  --content-bg-color: #fefefe;
+  --content-font-color: #000000;
+  --content-item-bg-color-hover: #fdf0e1;
+
+  --el-color-primary: #f1a36ab3;
+  --nav-bg-color: #ffe4c4;
+
+  --el-color-primary-dark-2: #f1a36a;
+  --el-color-primary-light-3: #f1a36a8a;
+  --el-color-white: #fff;
+  --el-switch-core-color: #c7895a;
+  --content-item-bg-color-hover: #fdf0e1;
+  --completed-text-color: #999;
+}
 
 *,
 *::before,
@@ -110,6 +136,10 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+input {
+  font-size: 16px !important;
 }
 .el-switch__core .el-switch__action {
   background-color: var(--el-switch-core-color);

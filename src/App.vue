@@ -13,7 +13,10 @@ onMounted(() => {
   if (theme.value == 'dark') {
     document.documentElement.setAttribute('data-theme', 'dark');
   } else {
-    document.documentElement.setAttribute('data-theme', 'light');
+    /* document.documentElement.setAttribute('data-theme', 'light'); */
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      theme.value = 'dark';
+    }
   }
 });
 
